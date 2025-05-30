@@ -1,0 +1,24 @@
+[2025-05-30 23:36:50] local.ERROR: Symfony\Component\Console\Exception\CommandNotFoundException: Command "create:theme" is not defined.
+
+Did you mean one of these?
+    create:command
+    create:component
+    create:contentfield
+    create:controller
+    create:factory
+    create:filterwidget
+    create:formwidget
+    create:job
+    create:migration
+    create:model
+    create:plugin
+    create:reportwidget
+    create:seeder
+    create:test in /mnt/c/Users/diego/Documents/asicadh.org/vendor/symfony/console/Application.php:737
+Stack trace:
+#0 /mnt/c/Users/diego/Documents/asicadh.org/vendor/symfony/console/Application.php(266): Symfony\Component\Console\Application->find()
+#1 /mnt/c/Users/diego/Documents/asicadh.org/vendor/symfony/console/Application.php(175): Symfony\Component\Console\Application->doRun()
+#2 /mnt/c/Users/diego/Documents/asicadh.org/vendor/laravel/framework/src/Illuminate/Console/Application.php(102): Symfony\Component\Console\Application->run()
+#3 /mnt/c/Users/diego/Documents/asicadh.org/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(155): Illuminate\Console\Application->run()
+#4 /mnt/c/Users/diego/Documents/asicadh.org/artisan(35): Illuminate\Foundation\Console\Kernel->handle()
+#5 {main}  

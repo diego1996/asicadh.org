@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es" x-data="{ fontSize: 100, contrast: false, menuOpen: false, slide: 0 }"
+      :class="contrast ? 'high-contrast' : ''" :style="`font-size:${fontSize}%`">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ASICADH – Derechos Humanos y Servicios Sociales</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"/>
+
+    <!-- Font Awesome 6 vía CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.0/css/all.min.css">
+
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+<a href="#main" class="skip-link">Saltar al contenido</a>
+
+<header>
+    <div class="logo-area">
+        <img src="assets/images/logo_asicadh_100x100.png" alt="Logo ASICADH"/>
+        <div>
+            <h1>ASICADH</h1>
+            <span>Derechos Humanos y Servicios Sociales</span>
+        </div>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/eventos/">Eventos</a></li>
+            <li><a href="/cursos/">Cursos</a></li>
+            <li><a href="/contacto/">Contacto</a></li>
+        </ul>
+    </nav>
+    <button class="menu-toggle" @click="menuOpen = !menuOpen">
+        <i class="fas fa-bars"></i>
+    </button>
+</header>
+
+<div class="mobile-menu" x-show="menuOpen" x-transition>
+    <a href="#inicio">Inicio</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#proyectos">Proyectos</a>
+    <a href="#contacto">Contacto</a>
+</div>
+
+<!-- SLIDER HERO -->
+<section class="slider" id="inicio" x-init="setInterval(() => slide = (slide + 1) % 3, 7000)">
+    <template x-for="(banner, index) in [
+    { image: 'https://images.unsplash.com/photo-1600411833579-e80e90a6e2ed?auto=format&fit=crop&w=1950&q=80', title: 'Protección a líderes sociales', desc: 'Entornos seguros para la defensa de los derechos humanos.' },
+    { image: 'https://images.unsplash.com/photo-1559027615-cdcb9d27c173?auto=format&fit=crop&w=1950&q=80', title: 'Justicia y verdad', desc: 'Apoyamos la reconstrucción social con la OEA en el Meta.' },
+    { image: 'https://images.unsplash.com/photo-1627843563095-11c637735a8c?auto=format&fit=crop&w=1950&q=80', title: 'Campesinado digno', desc: 'Defendemos los derechos rurales y el acceso a la tierra.' }
+  ]">
+        <div class="slide" :class="{ 'active': slide === index }" :style="`background-image: url(${banner.image})`">
+            <div class="slider-content">
+                <h1 x-text="banner.title"></h1>
+                <p x-text="banner.desc"></p>
+            </div>
+        </div>
+    </template>
+    <div class="slider-controls">
+        <template x-for="n in 3">
+            <button :class="{ 'active': slide === n - 1 }" @click="slide = n - 1"></button>
+        </template>
+    </div>
+</section>
+
+<!-- Redes Sociales Flotantes -->
+<div class="social-float">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-youtube"></i></a>
+    <a href="#"><i class="fab fa-tiktok"></i></a>
+</div>
+
+<!-- CONTENIDO PRINCIPAL -->
+<main id="main" style="padding: 2rem;">
+    <!-- SECCIÓN MISIÓN Y VISIÓN ESTILO OSCURO -->
+
+    <section id="galeria" style="padding: 4rem 2rem; background: #f9f9f9; color: #222;">
+        <div style="max-width: 1200px; margin: auto;">
+            <h2 style="text-align: center; font-size: 2rem; color: var(--c-gold); margin-bottom: 2rem;">🎥 Galería de
+                Impacto</h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+
+                <!-- Imagen local -->
+                <div style="position: relative; overflow: hidden; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                    <img src="assets/images/trabajo1.jpg" alt="Trabajo comunitario"
+                         style="width: 100%; height: auto; display: block;">
+                    <span style="position: absolute; top: 0.5rem; left: 0.5rem; background: var(--c-gold); color: #000; font-size: 0.75rem; font-weight: bold; padding: 0.25rem 0.5rem; border-radius: 4px;">IMAGEN</span>
+                </div>
+
+                <!-- Video local -->
+                <div style="position: relative; border-radius: 6px; overflow: hidden; background: #000;">
+                    <video controls style="width: 100%; display: block;">
+                        <source src="assets/videos/campana1.mp4" type="video/mp4">
+                        Tu navegador no soporta video HTML5.
+                    </video>
+                    <span style="position: absolute; top: 0.5rem; left: 0.5rem; background: #d4af37; color: #000; font-size: 0.75rem; font-weight: bold; padding: 0.25rem 0.5rem; border-radius: 4px;">VIDEO</span>
+                </div>
+
+                <!-- Video de YouTube -->
+                <div style="position: relative; border-radius: 6px; overflow: hidden;">
+                    <iframe width="100%" height="200" src="https://www.youtube.com/embed/EeTz5cEZz1I"
+                            title="YouTube video" frameborder="0"
+                            allowfullscreen style="border-radius: 6px;"></iframe>
+                    <span style="position: absolute; top: 0.5rem; left: 0.5rem; background: #d4af37; color: #000; font-size: 0.75rem; font-weight: bold; padding: 0.25rem 0.5rem; border-radius: 4px;">YOUTUBE</span>
+                </div>
+
+                <!-- Otra imagen -->
+                <div style="position: relative; overflow: hidden; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                    <img src="assets/images/evento3.jpg" alt="Actividad formativa" style="width: 100%; height: auto;">
+                    <span style="position: absolute; top: 0.5rem; left: 0.5rem; background: var(--c-gold); color: #000; font-size: 0.75rem; font-weight: bold; padding: 0.25rem 0.5rem; border-radius: 4px;">IMAGEN</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="nosotros"
+             style="position: relative; background: linear-gradient(135deg, #0e0e0e, #1a1a1a); color: #fff; padding: 4rem 2rem; overflow: hidden;">
+        <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2rem;">
+
+            <!-- TEXTO -->
+            <div style="flex: 1 1 500px;" class="fade-up">
+                <div style="border-left: 4px solid var(--c-accent); padding-left: 1rem; margin-bottom: 2rem;">
+                    <h2 style="color: var(--c-gold); font-size: 2.2rem; margin-bottom: 0.5rem;">Visión</h2>
+                    <p style="line-height: 1.7;">Ser la entidad que articule y ejecute <strong
+                            style="color: var(--c-accent);">SOLUCIONES</strong> a toda problemática de la sociedad.</p>
+                </div>
+
+                <div style="border-left: 4px solid var(--c-accent); padding-left: 1rem;">
+                    <h2 style="color: var(--c-gold); font-size: 2.2rem; margin-bottom: 0.5rem;">Misión</h2>
+                    <p style="line-height: 1.7;">
+                        Socializar, Capacitar, Entrenar y Empoderar en Defensoría de Derechos Humanos, creando proyectos
+                        que
+                        generen soluciones eficaces beneficiando a las personas necesitadas y vulnerables.
+                    </p>
+                    <ul style="margin-top: 1rem; padding-left: 1.25rem; list-style: disc; color: #ccc;">
+                        <li>Declaración Universal de Derechos Humanos (1948)</li>
+                        <li>Pacto Internacional de Derechos Civiles y Políticos (1966)</li>
+                        <li>Pacto Internacional de Derechos Económicos, Sociales y Culturales</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <p style="font-weight: bold; margin-bottom: 0;">ANDRÉS BARBOSA</p>
+                    <p style="color: var(--c-accent); margin: 0;">Director General de ASICADH</p>
+                    <p style="color: var(--c-gold); font-weight: bold;">(+57) 302 843 7323</p>
+                </div>
+            </div>
+
+            <!-- ESCUDO -->
+            <div style="flex: 1 1 400px; text-align: center;" class="float-in">
+                <img src="assets/images/logo_asicadh.png" alt="Escudo ASICADH"
+                     style="max-width: 100%; height: auto; transform: scale(1); transition: transform 0.8s ease;"
+                     onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            </div>
+        </div>
+    </section>
+
+    <section id="eventos" style="padding: 4rem 2rem; background: #f6f6f6; color: #222;">
+        <div style="max-width: 1200px; margin: auto;">
+            <h2 style="font-size: 2rem; margin-bottom: 2rem; color: var(--c-gold); text-align: center;">📅 Próximos
+                Eventos</h2>
+
+            <div style="display: flex; overflow-x: auto; gap: 1.5rem; scroll-snap-type: x mandatory; padding-bottom: 1rem;">
+
+                <!-- Evento -->
+                <div style="flex: 0 0 280px; background: white; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); padding: 1rem; scroll-snap-align: start;">
+                    <div style="font-size: 0.85rem; color: var(--c-accent); font-weight: bold;">16 DIC 2024</div>
+                    <h3 style="font-size: 1.2rem; margin: 0.5rem 0;">Premio Derechos Humanos</h3>
+                    <p style="font-size: 0.9rem;">Reconocimiento a líderes sociales y defensores en el Meta.</p>
+                    <a href="#" style="color: var(--c-gold); font-weight: bold; text-decoration: underline;">Ver más</a>
+                </div>
+
+                <!-- Otro evento -->
+                <div style="flex: 0 0 280px; background: white; border-radius: 8px; padding: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); scroll-snap-align: start;">
+                    <div style="font-size: 0.85rem; color: var(--c-accent); font-weight: bold;">10 ENE 2025</div>
+                    <h3 style="font-size: 1.2rem; margin: 0.5rem 0;">Foro Justicia Social</h3>
+                    <p style="font-size: 0.9rem;">Diálogos regionales por la equidad y los derechos humanos.</p>
+                    <a href="#" style="color: var(--c-gold); font-weight: bold; text-decoration: underline;">Ver más</a>
+                </div>
+
+                <!-- Agrega más bloques según necesidad -->
+            </div>
+        </div>
+    </section>
+
+    <section id="departamentos" style="background: #1a1a1a; color: #eee; padding: 5rem 2rem;">
+        <div style="max-width: 1200px; margin: auto; text-align: center;">
+            <div style="margin-bottom: 2rem;">
+                <div style="display: inline-block; background: #222; padding: 0.5rem 1rem; border-radius: 999px; border: 2px solid var(--c-gold); color: var(--c-gold); font-weight: bold;">
+                    <i class="fas fa-shield-alt"></i> 02
+                </div>
+                <h2 style="margin-top: 1rem; font-size: 2.5rem; color: #fff;">Nuestros Departamentos</h2>
+                <p style="max-width: 720px; margin: 0 auto; color: #aaa;">Nuestro equipo aborda problemas sociales
+                    complejos, desde el acceso a la justicia hasta la educación y la seguridad, construyendo soluciones
+                    sostenibles.</p>
+            </div>
+
+            <!-- GRID DE DEPARTAMENTOS -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                <!-- Departamento -->
+                <div>
+                    <div style="color: var(--c-gold); font-size: 2rem; margin-bottom: 0.5rem;"><i
+                            class="fas fa-bullhorn"></i></div>
+                    <h3 style="color: #fff;">Departamento Comunicación Social</h3>
+                    <div style="height: 2px; width: 40px; background: var(--c-gold); margin: 0.5rem 0;"></div>
+                    <p style="color: #ccc;">Promovemos la difusión de información y desarrollamos estrategias para
+                        sensibilizar a la sociedad sobre DDHH y justicia social.</p>
+                </div>
+
+                <div>
+                    <div style="color: var(--c-gold); font-size: 2rem; margin-bottom: 0.5rem;"><i
+                            class="fas fa-scale-balanced"></i></div>
+                    <h3 style="color: #fff;">Departamento de Defensoría DDHH</h3>
+                    <div style="height: 2px; width: 40px; background: var(--c-gold); margin: 0.5rem 0;"></div>
+                    <p style="color: #ccc;">Consultoría legal y apoyo en procesos judiciales relacionados con los
+                        derechos humanos.</p>
+                </div>
+
+                <div>
+                    <div style="color: var(--c-gold); font-size: 2rem; margin-bottom: 0.5rem;"><i
+                            class="fas fa-user-shield"></i></div>
+                    <h3 style="color: #fff;">Departamento Seguridad y Protección</h3>
+                    <div style="height: 2px; width: 40px; background: var(--c-gold); margin: 0.5rem 0;"></div>
+                    <p style="color: #ccc;">Investigaciones, escoltas y protocolos de seguridad para líderes y
+                        comunidades en riesgo.</p>
+                </div>
+
+                <div>
+                    <div style="color: var(--c-gold); font-size: 2rem; margin-bottom: 0.5rem;"><i
+                            class="fas fa-chart-line"></i></div>
+                    <h3 style="color: #fff;">Departamento Gestión Financiera</h3>
+                    <div style="height: 2px; width: 40px; background: var(--c-gold); margin: 0.5rem 0;"></div>
+                    <p style="color: #ccc;">Planificación, recursos y cooperación internacional para sostenibilidad
+                        institucional.</p>
+                </div>
+
+                <div>
+                    <div style="color: var(--c-gold); font-size: 2rem; margin-bottom: 0.5rem;"><i
+                            class="fas fa-users-cog"></i></div>
+                    <h3 style="color: #fff;">Departamento de Veeduría DDHH</h3>
+                    <div style="height: 2px; width: 40px; background: var(--c-gold); margin: 0.5rem 0;"></div>
+                    <p style="color: #ccc;">Monitoreamos instituciones y denunciamos violaciones a los derechos
+                        fundamentales.</p>
+                </div>
+
+                <div>
+                    <div style="color: var(--c-gold); font-size: 2rem; margin-bottom: 0.5rem;"><i
+                            class="fas fa-globe-americas"></i></div>
+                    <h3 style="color: #fff;">Departamento Cooperación Internacional</h3>
+                    <div style="height: 2px; width: 40px; background: var(--c-gold); margin: 0.5rem 0;"></div>
+                    <p style="color: #ccc;">Alianzas con organismos multilaterales para proyectos de inclusión, paz y
+                        desarrollo.</p>
+                </div>
+
+                <div>
+                    <div style="color: var(--c-gold); font-size: 2rem; margin-bottom: 0.5rem;"><i
+                            class="fas fa-laptop-code"></i></div>
+                    <h3 style="color: #fff;">Departamento Tecnología e Innovación</h3>
+                    <div style="height: 2px; width: 40px; background: var(--c-gold); margin: 0.5rem 0;"></div>
+                    <p style="color: #ccc;">Herramientas digitales y educación para la protección de datos y la
+                        inclusión tecnológica.</p>
+                </div>
+
+                <div>
+                    <div style="color: var(--c-gold); font-size: 2rem; margin-bottom: 0.5rem;"><i
+                            class="fas fa-flask"></i></div>
+                    <h3 style="color: #fff;">Departamento Laboratorio de Proyectos</h3>
+                    <div style="height: 2px; width: 40px; background: var(--c-gold); margin: 0.5rem 0;"></div>
+                    <p style="color: #ccc;">Diseñamos soluciones adaptativas a problemáticas sociales emergentes.</p>
+                </div>
+
+                <div>
+                    <div style="color: var(--c-gold); font-size: 2rem; margin-bottom: 0.5rem;"><i
+                            class="fas fa-chalkboard-teacher"></i></div>
+                    <h3 style="color: #fff;">Departamento Educativo</h3>
+                    <div style="height: 2px; width: 40px; background: var(--c-gold); margin: 0.5rem 0;"></div>
+                    <p style="color: #ccc;">Talleres y formación en DDHH, empoderamiento y liderazgo social para
+                        comunidades.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="compromiso"
+             style="position: relative; background-image: url('assets/images/person2.jpg'); background-size: cover; background-position: center; padding: 6rem 2rem; color: white; text-align: center;">
+        <div style="position: absolute; inset: 0; background-color: rgba(212, 175, 55, 0.8); z-index: 1;"></div>
+
+        <div style="position: relative; z-index: 2; max-width: 900px; margin: auto;">
+            <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">Más de 8 años de compromiso con la
+                justicia social</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">ASICADH está legalmente constituida desde el <strong>25
+                de Mayo del año 2016</strong></p>
+
+            <a href="#contacto" style="
+      display: inline-block;
+      background: #111;
+      color: #fff;
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.3s;
+    " onmouseover="this.style.background='#333'" onmouseout="this.style.background='#111'">
+                Solicitar Asesoría Gratuita
+            </a>
+        </div>
+    </section>
+
+    <section id="noticias" style="padding: 4rem 2rem; background: #1a1a1a; color: #eee;">
+        <div style="max-width: 1200px; margin: auto;">
+            <h2 style="font-size: 2rem; color: var(--c-gold); text-align: center; margin-bottom: 2rem;">📰 Noticias
+                Destacadas</h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+
+                <!-- Noticia -->
+                <article
+                        style="background: #111; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.2); transition: transform 0.3s;">
+                    <img src="assets/images/ddhh-event.jpeg" alt="Imagen noticia"
+                         style="width: 100%; height: 180px; object-fit: cover;">
+                    <div style="padding: 1rem;">
+                        <h3 style="margin: 0; font-size: 1.2rem;">ASICADH gana reconocimiento nacional</h3>
+                        <p style="font-size: 0.9rem; color: #aaa;">Nuestro trabajo en zonas rurales fue premiado en
+                            Bogotá por entidades defensoras.</p>
+                        <a href="#" style="color: var(--c-accent); font-weight: bold; text-decoration: underline;">Leer
+                            más</a>
+                    </div>
+                </article>
+
+                <!-- Otra noticia -->
+                <article style="background: #111; border-radius: 6px; overflow: hidden;">
+                    <img src="assets/images/ddhh-event.jpeg" alt="Imagen noticia"
+                         style="width: 100%; height: 180px; object-fit: cover;">
+                    <div style="padding: 1rem;">
+                        <h3 style="margin: 0;">Nuevas capacitaciones en Meta</h3>
+                        <p style="font-size: 0.9rem; color: #aaa;">Iniciamos 2025 con formación en DDHH para líderes de
+                            base comunitaria.</p>
+                        <a href="#" style="color: var(--c-accent); font-weight: bold; text-decoration: underline;">Leer
+                            más</a>
+                    </div>
+                </article>
+
+                <!-- Agrega más bloques según necesidad -->
+            </div>
+        </div>
+    </section>
+
+    <section id="por-que-elegirnos" style="background: #f5f5f5; padding: 4rem 2rem; text-align: center;">
+        <div style="max-width: 1200px; margin: auto;">
+
+            <!-- Encabezado -->
+            <div style="margin-bottom: 3rem;">
+                <div style="margin-bottom: 0.5rem;">
+                    <img src="assets/images/logo_asicadh_200x200.png" alt="Ícono decorativo" style="height: 40px;"/>
+                </div>
+                <h2 style="font-size: 2rem; color: var(--c-gold); margin: 0 0 0.5rem;">¿Por qué elegirnos?</h2>
+                <p style="color: #555; max-width: 700px; margin: auto; font-size: 1rem;">
+                    En ASICADH, nos dedicamos a transformar vidas a través de la justicia social, promoviendo igualdad y
+                    acceso a derechos para todos a través de nuestros pilares:
+                </p>
+            </div>
+
+            <!-- Cuerpo -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; align-items: center;">
+
+                <!-- Lado Izquierdo -->
+                <div style="text-align: left;">
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="font-size: 1.2rem; color: #111;">Fortalecer Comunidades</h3>
+                        <div style="width: 2rem; height: 2px; background: var(--c-gold); margin: 0.5rem 0;"></div>
+                        <p style="color: #666;">Impulsamos proyectos enfocados en comunidades vulnerables,
+                            proporcionando recursos y apoyo clave para su bienestar.</p>
+                    </div>
+
+                    <div>
+                        <h3 style="font-size: 1.2rem; color: #111;">Educación y Capacitación</h3>
+                        <div style="width: 2rem; height: 2px; background: var(--c-gold); margin: 0.5rem 0;"></div>
+                        <p style="color: #666;">Brindamos talleres y programas educativos con enfoque en derechos
+                            humanos y liderazgo social.</p>
+                    </div>
+                </div>
+
+                <!-- Imagen Central -->
+                <div style="text-align: center;">
+                    <img src="assets/images/ddhh-event.jpeg" alt="Premio Derechos Humanos del Meta"
+                         style="max-width: 100%; border-radius: 6px; box-shadow: 0 5px 20px rgba(0,0,0,0.2);"/>
+                </div>
+
+                <!-- Lado Derecho -->
+                <div style="text-align: left;">
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="font-size: 1.2rem; color: #111;">Asesoría Legal</h3>
+                        <div style="width: 2rem; height: 2px; background: var(--c-gold); margin: 0.5rem 0;"></div>
+                        <p style="color: #666;">Ofrecemos representación legal gratuita y acompañamiento en defensa de
+                            derechos fundamentales.</p>
+                    </div>
+
+                    <div>
+                        <h3 style="font-size: 1.2rem; color: #111;">Empoderamiento Social</h3>
+                        <div style="width: 2rem; height: 2px; background: var(--c-gold); margin: 0.5rem 0;"></div>
+                        <p style="color: #666;">Fomentamos el liderazgo y la participación activa de ciudadanos para
+                            lograr una sociedad más equitativa.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="consulta-gratuita"
+             style="display: flex; flex-wrap: wrap; min-height: 600px; background: #121212; color: #eee; font-family: 'Inter', sans-serif;">
+
+        <!-- Formulario Derecho -->
+        <div style="flex: 1 1 50%; padding: 4rem 2rem; display: flex; align-items: center;">
+            <div style="width: 100%; max-width: 560px; margin: auto;">
+
+                <!-- Encabezado -->
+                <div style="margin-bottom: 2rem; text-align: left;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <img src="assets/images/logo_asicadh_200x200.png" alt="Icono ASICADH"
+                             style="height: 40px; border-radius: 50%;">
+                        <h2 style="color: var(--c-gold); font-size: 1.8rem; margin: 0;">Consulta Gratuita</h2>
+                    </div>
+                    <p style="color: #bbb; font-size: 1rem; line-height: 1.6;">Entendemos que cada caso es único.
+                        Rellena este formulario y un asesor especializado se comunicará contigo pronto.</p>
+                </div>
+
+                <!-- Formulario Animado -->
+                <form style="display: grid; gap: 1rem; animation: fadeIn 0.8s ease-in-out;">
+                    <div style="display: flex; gap: 1rem;">
+                        <input type="text" placeholder="Nombre" required
+                               style="flex:1; background: transparent; border: none; border-bottom: 2px solid #444; padding: 0.75rem; color: #fff; transition: border-color 0.3s ease;"
+                               onfocus="this.style.borderBottomColor='var(--c-gold)'"
+                               onblur="this.style.borderBottomColor='#444'">
+                        <input type="text" placeholder="Apellido" required
+                               style="flex:1; background: transparent; border: none; border-bottom: 2px solid #444; padding: 0.75rem; color: #fff;"
+                               onfocus="this.style.borderBottomColor='var(--c-gold)'"
+                               onblur="this.style.borderBottomColor='#444'">
+                    </div>
+
+                    <div style="display: flex; gap: 1rem;">
+                        <input type="email" placeholder="Correo electrónico" required
+                               style="flex:1; background: transparent; border: none; border-bottom: 2px solid #444; padding: 0.75rem; color: #fff;"
+                               onfocus="this.style.borderBottomColor='var(--c-gold)'"
+                               onblur="this.style.borderBottomColor='#444'">
+                        <input type="tel" placeholder="Teléfono"
+                               style="flex:1; background: transparent; border: none; border-bottom: 2px solid #444; padding: 0.75rem; color: #fff;"
+                               onfocus="this.style.borderBottomColor='var(--c-gold)'"
+                               onblur="this.style.borderBottomColor='#444'">
+                    </div>
+
+                    <select required
+                            style="background: transparent; border: none; border-bottom: 2px solid #444; padding: 0.75rem; color: #ccc; width: 100%;"
+                            onfocus="this.style.borderBottomColor='var(--c-gold)'"
+                            onblur="this.style.borderBottomColor='#444'">
+                        <option value="" disabled selected>Selecciona el área de consulta</option>
+                        <option value="legal">Asesoría Legal</option>
+                        <option value="social">Apoyo Social</option>
+                        <option value="educacion">Educación y DDHH</option>
+                    </select>
+
+                    <textarea rows="3" placeholder="Describe brevemente tu caso" required
+                              style="background: transparent; border: none; border-bottom: 2px solid #444; padding: 0.75rem; color: #fff; resize: none;"
+                              onfocus="this.style.borderBottomColor='var(--c-gold)'"
+                              onblur="this.style.borderBottomColor='#444'"></textarea>
+
+                    <button type="submit"
+                            style="background-color: var(--c-gold); color: #000; padding: 0.75rem 1.5rem; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; transition: background 0.3s;">
+                        ENVIAR SOLICITUD
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- 🤝 Aliados -->
+<section id="aliados" class="ally-section" x-data="logosCarousel()" x-init="start()">
+    <h2 class="ally-title">Nuestros Aliados</h2>
+
+    <div class="logo-track-wrapper">
+        <div class="logo-track" :style="`transform:translateX(-${offset}px)`">
+            <template x-for="logo in logos" :key="logo">
+                <div class="logo-item">
+                    <img :src="logo" alt="Logo aliado"/>
+                </div>
+            </template>
+        </div>
+
+        <!-- Controles -->
+        <button class="logo-control prev" @click="prev()">❮</button>
+        <button class="logo-control next" @click="next()">❯</button>
+    </div>
+</section>
+
+
+<footer style="background: #111; color: #ccc;">
+    <!-- CONTENIDO -->
+    <div style="margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem;">
+
+        <!-- Sobre ASICADH -->
+        <div>
+            <h4 style="color: var(--c-gold); margin-bottom: 1rem;">Sobre ASICADH</h4>
+            <p>Asociación Internacional de Defensores de Derechos Humanos. Trabajamos con comunidades, líderes sociales,
+                víctimas y organismos internacionales para garantizar dignidad y justicia.</p>
+            <p style="margin-top: 1rem;"><i class="fas fa-handshake-angle"></i> Compromiso, dignidad y acción
+                transformadora.</p>
+        </div>
+
+        <!-- Enlaces útiles -->
+        <div>
+            <h4 style="color: var(--c-gold); margin-bottom: 1rem;">Enlaces útiles</h4>
+            <ul style="list-style: none; padding: 0;">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#">Transparencia</a></li>
+                <li><a href="#">Publicaciones</a></li>
+                <li><a href="#">Donaciones</a></li>
+            </ul>
+        </div>
+
+        <!-- Contacto -->
+        <div>
+            <h4 style="color: var(--c-gold); margin-bottom: 1rem;">Contacto</h4>
+            <p><i class="fas fa-envelope"></i> contacto@asicadh.org</p>
+            <p><i class="fas fa-phone"></i> +57 320 000 0000</p>
+            <p><i class="fas fa-map-marker-alt"></i> Villavicencio, Meta – Colombia</p>
+            <p><i class="fas fa-clock"></i> Lunes a Viernes, 8:00 a.m – 5:00 p.m</p>
+        </div>
+
+        <!-- Redes sociales -->
+        <div>
+            <h4 style="color: var(--c-gold); margin-bottom: 1rem;">Síguenos</h4>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                <a href="#" style="color: #ccc;"><i class="fab fa-facebook fa-lg"></i></a>
+                <a href="#" style="color: #ccc;"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" style="color: #ccc;"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="#" style="color: #ccc;"><i class="fab fa-youtube fa-lg"></i></a>
+                <a href="#" style="color: #ccc;"><i class="fab fa-tiktok fa-lg"></i></a>
+                <a href="#" style="color: #ccc;"><i class="fab fa-whatsapp fa-lg"></i></a>
+            </div>
+
+            <h5 style="color: var(--c-gold); font-size: 0.95rem;">¿Quieres mantenerte informado?</h5>
+            <form style="margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                <input type="email" placeholder="Tu correo electrónico"
+                       style="padding: 0.6rem 1rem; font-size: 1rem; background: #fff; color: #111; border-radius: 4px; border: 1px solid #ccc; transition: border 0.3s;"
+                       onfocus="this.style.borderColor='#d4af37'" onblur="this.style.borderColor='#ccc'">
+                <button type="submit"
+                        style="background: var(--c-gold); color: #000; font-weight: bold; padding: 0.6rem 1rem; border: none; border-radius: 4px; cursor: pointer; transition: background 0.3s;">
+                    Suscribirse
+                </button>
+            </form>
+
+        </div>
+    </div>
+</footer>
+
+<!-- COPY FINAL -->
+<div style="margin-top: 0; background-color: #000; padding: 2rem 1rem; text-align: center; font-size: 0.875rem; color: #aaa;">
+    <p style="margin: 0;">© 2025 <strong style="color: #fff;">ASICADH</strong> – Todos los derechos reservados</p>
+    <p style="margin-top: 0.4rem;">
+        Hecho con <i class="fas fa-heart" style="color: #d4af37;"></i> en Colombia por
+        <strong>@diegoasencio96</strong> y <strong>BitLink S.A.S</strong>
+    </p>
+</div>
+
+<!-- 🧩 Alpine Helpers -->
+<script>
+    function uiState() {
+        return {
+            fontSize: 100,
+            contrast: false,
+        };
+    }
+
+    // Carrusel de logos con auto-scroll
+    function logosCarousel() {
+        const LOGO_WIDTH = 160 + 48; // 160 px logo + 48 px gap (3 rem)
+        return {
+            logos: [
+                'assets/images/centinela.png',
+                'assets/images/oea.png',
+                'assets/images/logo.png',
+                'assets/images/logo_asicadh_100x100.png',
+            ],
+            offset: 0,
+            timer: null,
+            start() {
+                this.timer = setInterval(() => this.next(), 3500);
+            },
+            next() {
+                this.offset = (this.offset + LOGO_WIDTH) % (LOGO_WIDTH * this.logos.length);
+            },
+            prev() {
+                this.offset = (this.offset - LOGO_WIDTH + LOGO_WIDTH * this.logos.length) %
+                    (LOGO_WIDTH * this.logos.length);
+            },
+        };
+    }
+</script>
+
+
+</body>
+</html>
